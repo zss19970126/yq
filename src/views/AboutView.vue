@@ -1,0 +1,326 @@
+<template>
+  <div class=container>
+    <div class=content style="display:block;width:1000px;height:562px">
+      <div class=container-full>
+        <div class="animated hue"></div>
+        <img class=backgroundImage src="@/assets/empty-room.jpg">
+        <!-- <img class=boyImage src="
+          https://drive.google.com/thumbnail?id=1eGqJskQQgBJ67myGekmo4YfIVI3lfDTm&sz=w1920"> -->
+        <div class=container>
+          <div class=cube>
+            <div class="face top"></div>
+            <div class="face bottom"></div>
+            <div class="face left text" v-html="kiplingPoem"></div>
+            <div class="face right text" v-html="kiplingPoem"></div>
+            <div class="face front"></div>
+            <div class="face back text" v-html="kiplingPoem"></div>
+          </div>
+        </div>
+        <div class=container-reflect>
+          <div class=cube>
+            <div class="face top"></div>
+            <div class="face bottom"></div>
+            <div class="face left text" v-html="kiplingPoem"></div>
+            <div class="face right text" v-html="kiplingPoem"></div>
+            <div class="face front"></div>
+            <div class="face back text" v-html="kiplingPoem"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script setup>
+import { onMounted } from 'vue';
+// Poem text
+const kiplingPoem = `<p class='pclass'>
+  兔兔 <span>你</span> 是最棒的， <span>勇敢兔兔</span> 天不怕地不怕 <span>你最牛</span>
+  兔兔 <span>你</span> 是最棒的， <span>勇敢兔兔</span> 天不怕地不怕 <span>你最牛</span>
+  兔兔 <span>你</span> 是最棒的， <span>勇敢兔兔</span> 天不怕地不怕 <span>你最牛</span>
+  兔兔 <span>你</span> 是最棒的， <span>勇敢兔兔</span> 天不怕地不怕 <span>你最牛</span>
+   </p>`
+
+function adjustContentSize() {
+  const contentDiv = document.querySelector(".content");
+  console.log(contentDiv)
+  const viewportWidth = window.innerWidth;
+  const baseWidth = 1000;
+  const scaleFactor = viewportWidth < baseWidth ? (viewportWidth / baseWidth) * 0.8 : 1;
+  contentDiv.style.transform = `scale(${scaleFactor})`;
+}
+
+
+onMounted(() => {
+  {
+    window.addEventListener("load", adjustContentSize);
+    window.addEventListener("resize", adjustContentSize);
+  }
+})
+
+</script>
+<style scoped>
+@import url(https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap);
+
+.card,
+.content,
+body {
+  overflow: hidden;
+}
+
+body {
+  width: 100vw;
+  height: 100vh;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: black;
+}
+
+.card,
+.container {
+  display: flex;
+  align-items: center;
+}
+
+.card {
+  width: 1280px;
+  height: 720px;
+  margin: 0;
+  justify-content: center;
+}
+
+.container-full,
+.content {
+  width: 1000px;
+  height: 562px;
+}
+
+.backgroundImage {
+  position: absolute;
+  width: 1000px;
+}
+
+.boyImage {
+  position: absolute;
+  width: 1000px;
+  z-index: 2;
+  animation: 200s linear infinite blur;
+}
+
+.content {
+  border-radius: 40px;
+  animation: 10s linear infinite brightness;
+}
+
+.container {
+  justify-content: center;
+}
+
+.container-full,
+.face {
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+
+.container-full {
+  margin: 0;
+  justify-content: center;
+  transform: scale(1);
+  animation: 200s linear infinite zoom-in;
+}
+
+.cube,
+.face {
+  width: 870px;
+  height: 190px;
+}
+
+.cube {
+  position: relative;
+  transform-style: preserve-3d;
+  perspective: 480px;
+  transform-style: preserve-3d;
+  perspective-origin: 51% 70%;
+}
+
+.face,
+.hue {
+  position: absolute;
+}
+
+.face {
+  background: 0 0;
+  border: 0 solid #000;
+  opacity: 0.5;
+}
+
+.bottom,
+.top {
+  width: 870px;
+  height: 870px;
+}
+
+.face.text>>>p {
+  white-space: nowrap;
+  overflow: hidden;
+  font-family: "Bebas Neue", sans-serif;
+  font-weight: 400;
+  font-size: calc(6em + (190px / 10) * 0.7);
+  padding-top: 20px;
+  color: #fff;
+}
+
+.face.text>>>span {
+  color: red;
+}
+
+.front {
+  transform: translateZ(435px);
+  display: none;
+}
+
+.back {
+  transform: translateZ(-435px) rotateY(180deg) scaleX(-1);
+}
+
+.left {
+  transform: translateX(-435px) rotateY(-90deg) scaleX(-1);
+}
+
+.right {
+  transform: translateX(435px) rotateY(90deg) scaleX(-1);
+}
+
+.top {
+  transform: translateY(-435px) rotateX(90deg) scaleY(-1);
+}
+
+.bottom {
+  transform: translateY(-245px) rotateX(-90deg) scaleY(-1);
+}
+
+.left>>>p {
+  margin-left: 480px;
+  animation: 20s linear infinite left;
+}
+
+.back>>>p {
+  margin-left: -390px;
+  animation: 20s linear infinite back;
+}
+
+.right>>>p {
+  margin-left: -1260px;
+  animation: 20s linear infinite right;
+}
+
+@keyframes left {
+  100% {
+    margin-left: -5400px;
+  }
+}
+
+@keyframes back {
+  100% {
+    margin-left: -6270px;
+  }
+}
+
+@keyframes right {
+  100% {
+    margin-left: -7140px;
+  }
+}
+
+.hue {
+  top: 0;
+  left: 0;
+  z-index: 3;
+  width: 100%;
+  height: 100%;
+  mix-blend-mode: overlay;
+  background: #1e5799;
+  background: radial-gradient(ellipse at center, #1e5799 0, #7db9e8 100%);
+  opacity: 1;
+}
+
+.hue.animated {
+  -webkit-animation: 8s infinite filter-animation;
+  animation: 8s infinite filter-animation;
+}
+
+.container-reflect {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 380px;
+  filter: blur(10px);
+}
+
+.container-reflect .cube {
+  perspective-origin: 51% -30%;
+}
+
+.container-reflect .back {
+  transform: translateZ(-435px) rotateY(180deg) scaleX(-1) scaleY(-1);
+}
+
+.container-reflect .left {
+  transform: translateX(-435px) rotateY(-90deg) scaleX(-1) scaleY(-1);
+}
+
+.container-reflect .right {
+  transform: translateX(435px) rotateY(90deg) scaleX(-1) scaleY(-1);
+}
+
+.container-reflect p {
+  transform: scaleY(70%);
+}
+
+@keyframes filter-animation {
+
+  0%,
+  100% {
+    filter: hue-rotate(0deg);
+  }
+
+  50% {
+    filter: hue-rotate(100deg);
+  }
+}
+
+@keyframes zoom-in {
+  0% {
+    transform: scale(1);
+  }
+
+  100% {
+    transform: scale(2.5);
+  }
+}
+
+@keyframes blur {
+  0% {
+    filter: blur(0px);
+  }
+
+  100% {
+    filter: blur(3px);
+  }
+}
+
+@keyframes brightness {
+  0% {
+    filter: brightness(1) contrast(1);
+  }
+
+  100% {
+    filter: brightness(0.8) contrast(1.3);
+  }
+}
+</style>
