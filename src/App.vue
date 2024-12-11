@@ -1,19 +1,25 @@
 <script setup lang="ts">
+import { ref, onMounted } from 'vue'
 import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
+
+const isLogin = ref(false)
+
+onMounted(() => {
+  isLogin.value = localStorage.getItem('isLogin')
+})
 </script>
 
 <template>
-  <header>
+  <!-- <header v-if="isLogin">
     <img alt="" class="logo" src="@/assets/logo.svg" width="125" height="125" />
 
     <div class="wrapper">
       <nav>
-        <RouterLink to="/">相册</RouterLink>
+        <RouterLink to="/home">相册</RouterLink>
         <RouterLink to="/about">滚动</RouterLink>
       </nav>
     </div>
-  </header>
+  </header> -->
 
   <RouterView />
 </template>
