@@ -15,4 +15,11 @@ export default defineConfig({
       '@': fileURLToPath(new URL('./src', import.meta.url))
     },
   },
+  base: './', //静态资源访问
+  build: {
+    outDir: 'dist',  // 打包输出目录
+    assetsDir: 'assets',  // 静态资源目录
+  },
 })
+// vite.config.js
+
