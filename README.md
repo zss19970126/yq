@@ -1,6 +1,6 @@
 # yq
 
-[This template should help get you started developing with Vue 3 in Vite.](https://zss19970126.github.io/yq/)
+[https://zss19970126.github.io/yq/](https://zss19970126.github.io/yq/)
 
 ## Recommended IDE Setup
 
